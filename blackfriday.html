@@ -335,7 +335,7 @@
         <p>Trouvez rapidement les produits les plus intéressants selon leur réduction, leur prix et leur boutique.</p>
       </div>
       <div class="hero-stat">
-        <strong id="dealCount">12</strong>
+        <strong id="dealCount">3</strong>
         <span>offres sélectionnées</span>
       </div>
     </section>
@@ -343,7 +343,7 @@
     <nav id="filters" class="filters" aria-label="Filtres par catégorie"></nav>
 
     <div class="toolbar">
-      <div id="resultCount" class="result-count">12 offres</div>
+      <div id="resultCount" class="result-count">3 offres</div>
       <select id="sort" class="sort" aria-label="Trier les offres">
         <option value="discount">Plus grosses réductions</option>
         <option value="price">Prix croissant</option>
@@ -352,23 +352,35 @@
     </div>
 
     <section id="deals" class="deals" aria-live="polite"></section>
-    <p class="disclaimer">Sélection de démonstration : les prix, stocks et promotions sont susceptibles de changer. Vérifiez toujours les conditions sur le site marchand.</p>
+    <p class="disclaimer">Offres vérifiées sur Amazon France le 21 novembre 2026. Prix et stocks susceptibles de changer. Les prix conseillés peuvent varier selon les vendeurs et les périodes.</p>
   </main>
 
   <script>
     const deals = [
-      { category: "Audio", store: "Amazon", name: "Sony WH-1000XM5", price: 279, oldPrice: 399, url: "https://www.amazon.fr/" },
-      { category: "Audio", store: "Fnac", name: "Apple AirPods Pro 2", price: 199, oldPrice: 279, url: "https://www.fnac.com/" },
-      { category: "Gaming", store: "Boulanger", name: "Sony PlayStation 5 Slim", price: 399, oldPrice: 549, url: "https://www.boulanger.com/" },
-      { category: "Gaming", store: "Fnac", name: "Nintendo Switch OLED", price: 299, oldPrice: 349, url: "https://www.fnac.com/" },
-      { category: "Maison", store: "Amazon", name: "Dyson V15 Detect", price: 449, oldPrice: 699, url: "https://www.amazon.fr/" },
-      { category: "Maison", store: "Boulanger", name: "Philips Airfryer 5000", price: 149, oldPrice: 229, url: "https://www.boulanger.com/" },
-      { category: "Ordinateurs", store: "Apple", name: "MacBook Air M3", price: 899, oldPrice: 1199, url: "https://www.apple.com/fr/" },
-      { category: "Ordinateurs", store: "Fnac", name: "Lenovo Legion 5 RTX", price: 999, oldPrice: 1499, url: "https://www.fnac.com/" },
-      { category: "Téléviseurs", store: "Boulanger", name: "Samsung OLED 55 pouces", price: 899, oldPrice: 1499, url: "https://www.boulanger.com/" },
-      { category: "Téléviseurs", store: "Amazon", name: "LG UHD 4K 65 pouces", price: 699, oldPrice: 999, url: "https://www.amazon.fr/" },
-      { category: "Smartphones", store: "Fnac", name: "Samsung Galaxy S24", price: 649, oldPrice: 909, url: "https://www.fnac.com/" },
-      { category: "Smartphones", store: "Amazon", name: "Google Pixel 8", price: 499, oldPrice: 799, url: "https://www.amazon.fr/" }
+      {
+        category: "Smartphones",
+        store: "Amazon",
+        name: "Google Pixel 11 - 256 Go",
+        price: 499.17,
+        oldPrice: 832.50,
+        url: "https://www.amazon.fr/Google-Pixel-Smartphone-Pistachio-Intelligence/dp/B0H62NRX69"
+      },
+      {
+        category: "Gaming",
+        store: "Amazon",
+        name: "Manette Sony DualSense PS5",
+        price: 46.66,
+        oldPrice: 65.82,
+        url: "https://www.amazon.fr/Playstation-Officielle-Adaptatives-Rechargeable-Compatible/dp/B094WLFGD3"
+      },
+      {
+        category: "Téléviseurs",
+        store: "Amazon",
+        name: "XIAOMI TV 43 pouces 4K 2026",
+        price: 215.83,
+        oldPrice: 274.17,
+        url: "https://www.amazon.fr/43-inch-L43MB-FAVEU-Control-Compatible-AirPlay/dp/B0H448LDSH"
+      }
     ];
 
     const filters = document.getElementById("filters");
