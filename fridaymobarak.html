@@ -335,7 +335,7 @@
         <p>Trouvez rapidement les produits les plus intéressants selon leur réduction, leur prix et leur boutique.</p>
       </div>
       <div class="hero-stat">
-        <strong id="dealCount">3</strong>
+        <strong id="dealCount">11</strong>
         <span>offres sélectionnées</span>
       </div>
     </section>
@@ -343,7 +343,7 @@
     <nav id="filters" class="filters" aria-label="Filtres par catégorie"></nav>
 
     <div class="toolbar">
-      <div id="resultCount" class="result-count">3 offres</div>
+      <div id="resultCount" class="result-count">11 offres</div>
       <select id="sort" class="sort" aria-label="Trier les offres">
         <option value="discount">Plus grosses réductions</option>
         <option value="price">Prix croissant</option>
@@ -352,14 +352,15 @@
     </div>
 
     <section id="deals" class="deals" aria-live="polite"></section>
-    <p class="disclaimer">Offres vérifiées sur Amazon France le 21 novembre 2026. Prix et stocks susceptibles de changer. Les prix conseillés peuvent varier selon les vendeurs et les périodes.</p>
+    <p class="disclaimer">Offres vérifiées sur Amazon France et Amazon Canada le 21 novembre 2026. Prix, stocks et promotions susceptibles de changer. Les prix conseillés peuvent varier selon les vendeurs et les périodes.</p>
   </main>
 
   <script>
     const deals = [
       {
         category: "Smartphones",
-        store: "Amazon",
+        store: "Amazon France",
+        currency: "EUR",
         name: "Google Pixel 11 - 256 Go",
         price: 499.17,
         oldPrice: 832.50,
@@ -367,7 +368,8 @@
       },
       {
         category: "Gaming",
-        store: "Amazon",
+        store: "Amazon France",
+        currency: "EUR",
         name: "Manette Sony DualSense PS5",
         price: 46.66,
         oldPrice: 65.82,
@@ -375,11 +377,84 @@
       },
       {
         category: "Téléviseurs",
-        store: "Amazon",
+        store: "Amazon France",
+        currency: "EUR",
         name: "XIAOMI TV 43 pouces 4K 2026",
         price: 215.83,
         oldPrice: 274.17,
         url: "https://www.amazon.fr/43-inch-L43MB-FAVEU-Control-Compatible-AirPlay/dp/B0H448LDSH"
+      },
+      {
+        category: "Montres",
+        store: "Amazon Canada",
+        currency: "CAD",
+        name: "Apple Watch Series 12 - 42 mm GPS",
+        price: 479.00,
+        oldPrice: 549.00,
+        url: "https://www.amazon.ca/Apple-Watch-Light-Aluminium-Sport/dp/B0HJB6QHDV"
+      },
+      {
+        category: "Maison",
+        store: "Amazon Canada",
+        currency: "CAD",
+        name: "Jackery Explorer 2000 v2 - 2042 Wh",
+        price: 989.00,
+        oldPrice: 2499.00,
+        url: "https://www.amazon.ca/Jackery-Explorer-Station-Reliable-Emergency/dp/B0HF7TQ7RV"
+      },
+      {
+        category: "Streaming",
+        store: "Amazon Canada",
+        currency: "CAD",
+        name: "Amazon Fire TV Stick 4K Plus",
+        price: 39.99,
+        oldPrice: 99.99,
+        url: "https://www.amazon.ca/Amazon-streaming-million-episodes-supports/dp/B0F7Z43QKK"
+      },
+      {
+        category: "Maison",
+        store: "Amazon Canada",
+        currency: "CAD",
+        name: "Amazon Echo Dot",
+        price: 44.99,
+        oldPrice: 104.99,
+        url: "https://www.amazon.ca/Amazon-Vibrant-sounding-bedrooms-Designed/dp/B09B94RL1R"
+      },
+      {
+        category: "Montres",
+        store: "Amazon Canada",
+        currency: "CAD",
+        name: "Samsung Galaxy Watch9 - 40 mm",
+        price: 379.99,
+        oldPrice: 519.99,
+        url: "https://www.amazon.ca/Samsung-Smartwatch-Bluetooth-Detection-Monitoring/dp/B0H4HJ2H5F"
+      },
+      {
+        category: "Beauté",
+        store: "Amazon Canada",
+        currency: "CAD",
+        name: "Philips Sonicare DiamondClean 9000",
+        price: 124.95,
+        oldPrice: 249.99,
+        url: "https://www.amazon.ca/Philips-Sonicare-Diamondclean-Rechargeable-Toothbrush/dp/B0B5VQHL6N"
+      },
+      {
+        category: "Beauté",
+        store: "Amazon Canada",
+        currency: "CAD",
+        name: "Dyson Airwrap i.d. Limited Edition",
+        price: 599.99,
+        oldPrice: 799.99,
+        url: "https://www.amazon.ca/Limited-Dyson-Airwrap-multi-styler-Straight/dp/B0HDVVDGZW"
+      },
+      {
+        category: "Maison",
+        store: "Amazon Canada",
+        currency: "CAD",
+        name: "eufy X10 Pro Omni Robot Aspirateur",
+        price: 489.99,
+        oldPrice: 699.99,
+        url: "https://www.amazon.ca/eufy-Auto-Lift-Detection-Self-Emptying-Self-Refilling/dp/B0CPFBBHP4"
       }
     ];
 
@@ -410,6 +485,24 @@
       return Math.round((1 - deal.price / deal.oldPrice) * 100);
     }
 
+    function formatPrice(deal) {
+      if (deal.currency === "CAD") {
+        return `$${deal.price.toFixed(2)} CAD`;
+      }
+      return `${deal.price.toFixed(2).replace(".", ",")} €`;
+    }
+
+    function formatOldPrice(deal) {
+      if (deal.currency === "CAD") {
+        return `$${deal.oldPrice.toFixed(2)} CAD`;
+      }
+      return `${deal.oldPrice.toFixed(2).replace(".", ",")} €`;
+    }
+
+    function normalizedAmount(deal, amount) {
+      return deal.currency === "CAD" ? amount * 0.63 : amount;
+    }
+
     function render() {
       const query = search.value.trim().toLowerCase();
       let visible = deals.filter(deal =>
@@ -418,8 +511,12 @@
       );
 
       visible.sort((a, b) => {
-        if (sort.value === "price") return a.price - b.price;
-        if (sort.value === "saving") return (b.oldPrice - b.price) - (a.oldPrice - a.price);
+        if (sort.value === "price") {
+          return normalizedAmount(a, a.price) - normalizedAmount(b, b.price);
+        }
+        if (sort.value === "saving") {
+          return normalizedAmount(b, b.oldPrice - b.price) - normalizedAmount(a, a.oldPrice - a.price);
+        }
         return discount(b) - discount(a);
       });
 
@@ -441,10 +538,10 @@
           <span class="store">${deal.store} · ${deal.category}</span>
           <h2>${deal.name}</h2>
           <div class="price-row">
-            <span class="price">${deal.price} €</span>
-            <span class="old-price">${deal.oldPrice} €</span>
+            <span class="price">${formatPrice(deal)}</span>
+            <span class="old-price">${formatOldPrice(deal)}</span>
           </div>
-          <div class="saving">Économie : ${saving} €</div>
+          <div class="saving">${deal.currency === "CAD" ? `Économie : $${saving.toFixed(2)} CAD` : `Économie : ${saving.toFixed(2).replace(".", ",")} €`}</div>
           <a class="deal-link" href="${deal.url}" target="_blank" rel="noopener noreferrer">Voir l'offre</a>
         `;
         dealsContainer.appendChild(card);
