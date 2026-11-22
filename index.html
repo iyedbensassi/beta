@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Slope - Jeu</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    html, body {
+      width: 100%; height: 100%; margin: 0; overflow: hidden;
+      background: #05070b; font-family: Arial, sans-serif;
+    }
+    .game-frame {
+      width: 100%; height: 100%; border: 0; display: block; background: #05070b;
+    }
+    .fallback {
+      position: fixed; inset: 0; display: none; place-items: center;
+      text-align: center; color: #fff; background: #05070b; z-index: 10;
+    }
+    .fallback.visible { display: grid; }
+    .fallback a {
+      display: inline-block; margin-top: 12px; padding: 12px 18px;
+      border-radius: 8px; color: #071018; background: #58d6ff;
+      font-weight: 700; text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <iframe
+    id="game"
+    class="game-frame"
+    src="https://slopeio.org/"
+    title="Slope"
+    allow="fullscreen; autoplay"
+    allowfullscreen
+  ></iframe>
+
+  <div id="fallback" class="fallback">
+    <div>
+      <strong>Impossible d'afficher le jeu dans cette page.</strong><br>
+      <a href="https://slopeio.org/" target="_blank" rel="noopener noreferrer">
+        Ouvrir Slope dans un nouvel onglet
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const frame = document.getElementById("game");
+    const fallback = document.getElementById("fallback");
+
+    frame.addEventListener("error", () => fallback.classList.add("visible"));
+
+    window.setTimeout(() => {
+      try {
+        if (!frame.contentWindow.location.href) {
+          fallback.classList.add("visible");
+        }
+      } catch {
+        // Cross-origin pages are normally loaded but cannot be inspected.
+      }
+    }, 5000);
+  </script>
+</body>
+</html>
