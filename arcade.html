@@ -592,17 +592,17 @@
         gamesNode.appendChild(button);
       });
       webMatches.forEach(game => {
-        const link = document.createElement("a");
+        const link = document.createElement("button");
         link.className = "game-card";
-        link.href = game.url;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-        link.innerHTML = `<span class="game-icon" aria-hidden="true">${game.icon}</span><strong>${game.name}</strong><span>${game.description}</span><span class="game-source">${game.category} · Ouvrir ↗</span>`;
+        link.type = "button"; link.addEventListener("click", () => openWebGame(game));
+        
+        
+        link.innerHTML = `<span class="game-icon" aria-hidden="true">${game.icon}</span><strong>${game.name}</strong><span>${game.description}</span><span class="game-source">${game.category} · Jouer ici</span>`;
         gamesNode.appendChild(link);
       });
     }
 
-    function openGame(id) {
+    function openWebGame(game){stopGame();activeGame="";gameTitle.textContent=game.name;modal.classList.add("open");document.body.style.overflow="hidden";gameArea.innerHTML="";const frame=document.createElement("iframe");frame.title=game.name;frame.src=game.url;frame.setAttribute("sandbox","allow-scripts allow-same-origin allow-forms allow-pointer-lock");frame.setAttribute("allow","autoplay; fullscreen; gamepad");frame.allowFullscreen=true;frame.style.cssText="width:100%;height:min(70vh,720px);min-height:380px;border:0;border-radius:12px;background:#090a17";gameArea.appendChild(frame);stopGame=()=>frame.remove();restartGame=()=>{frame.src=game.url};const note=document.createElement("p");note.className="status-line";note.textContent="Le jeu essaie de se lancer dans l’arcade. Si son site bloque l’intégration, il ne pourra pas fonctionner ici.";gameArea.appendChild(note);} function openGame(id) {
       stopGame();
       activeGame = id;
       const game = gameList.find(item => item.id === id);
@@ -612,7 +612,7 @@
       startGame(id);
     }
 
-    function closeGame() {
+    document.body.addEventListener("click",event=>{const link=event.target.closest('a[href^="http"]');if(link){event.preventDefault();openWebGame({name:link.textContent.trim(),url:link.href});}}); function closeGame() {
       stopGame();
       modal.classList.remove("open");
       document.body.style.overflow = "";
