@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101225">
+  <title>iyedbensassi.gaming.io — Jeux gratuits</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101225;
+      --panel: #191c35;
+      --panel-light: #222644;
+      --text: #f5f6ff;
+      --muted: #a7acc9;
+      --accent: #9c7bff;
+      --cyan: #54e4d3;
+      --pink: #ff6fae;
+      --border: rgba(255,255,255,.1);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 18% 0%, rgba(156,123,255,.19), transparent 34rem),
+        radial-gradient(ellipse at 95% 22%, rgba(84,228,211,.1), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    button, input { font: inherit; }
+    button { color: inherit; }
+
+    .shell { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+
+    header {
+      position: sticky;
+      z-index: 4;
+      top: 0;
+      border-bottom: 1px solid var(--border);
+      background: rgba(16,18,37,.88);
+      backdrop-filter: blur(15px);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--text);
+      font-weight: 950;
+      font-size: 19px;
+      letter-spacing: -.04em;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: linear-gradient(135deg, var(--accent), var(--pink));
+      box-shadow: 0 8px 26px rgba(156,123,255,.28);
+    }
+
+    .nav-note { color: var(--muted); font-size: 13px; }
+
+    main { padding: 34px 0 58px; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(24px, 5vw, 48px);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      background: linear-gradient(125deg, rgba(156,123,255,.22), rgba(25,28,53,.94) 60%);
+    }
+
+    .hero::after {
+      content: "✦";
+      position: absolute;
+      right: 8%;
+      top: 2%;
+      color: rgba(84,228,211,.16);
+      font-size: clamp(110px, 25vw, 260px);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      color: var(--cyan);
+      font-weight: 850;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 12px 0;
+      font-size: clamp(38px, 8vw, 76px);
+      line-height: .96;
+      letter-spacing: -.065em;
+    }
+
+    .hero p {
+      position: relative;
+      z-index: 1;
+      max-width: 620px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .hero-meta {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .pill {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(13,15,32,.48);
+      color: #d7d9ed;
+      font-size: 13px;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 26px 0 14px;
+    }
+
+    .toolbar h2 { margin: 0; font-size: 21px; letter-spacing: -.03em; }
+
+    .search {
+      width: min(310px, 55vw);
+      height: 42px;
+      padding: 0 13px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      outline: none;
+      background: var(--panel);
+      color: var(--text);
+    }
+
+    .search:focus { border-color: var(--accent); }
+
+    .web-search-panel {
+      display: grid;
+      gap: 12px;
+      margin-top: 30px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--panel);
+    }
+
+    .web-search-panel h2 { margin: 0; font-size: 20px; }
+    .web-search-form { display: flex; flex-wrap: wrap; gap: 10px; }
+    .web-search-form .search { flex: 1 1 240px; width: auto; }
+    .fortnite-panel {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+      padding: 18px 20px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(120deg, rgba(156,123,255,.16), var(--panel));
+    }
+    .fortnite-panel h2 { margin: 0; font-size: 19px; }
+    .fortnite-panel p { margin: 0; color: var(--muted); line-height: 1.5; }
+    .fortnite-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+    .button-link { display: inline-flex; align-items: center; text-decoration: none; }
+    .search-engine {
+      min-height: 42px;
+      padding: 0 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--panel-light);
+      color: var(--text);
+    }
+    .web-search-form .primary-button { min-height: 42px; }
+
+    .games {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .game-card {
+      min-height: 208px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(34,38,68,.96), rgba(25,28,53,.96));
+      text-align: left;
+      cursor: pointer;
+      color: inherit;
+      text-decoration: none;
+      transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+    }
+
+    .game-card:hover, .game-card:focus-visible {
+      transform: translateY(-4px);
+      border-color: rgba(156,123,255,.7);
+      box-shadow: 0 14px 34px rgba(0,0,0,.2);
+      outline: none;
+    }
+
+    .game-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 14px;
+      border-radius: 15px;
+      background: rgba(156,123,255,.17);
+      font-size: 28px;
+    }
+
+    .game-card:nth-child(3n+2) .game-icon { background: rgba(84,228,211,.15); }
+    .game-card:nth-child(3n) .game-icon { background: rgba(255,111,174,.15); }
+
+    .game-card strong { font-size: 17px; }
+    .game-card span:last-child { margin-top: 7px; color: var(--muted); font-size: 13px; }
+    .game-card span.game-source { margin-top: auto; padding-top: 13px; color: var(--cyan); font-size: 12px; font-weight: 800; }
+
+    .section-label {
+      margin: 28px 0 12px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .external-games { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .external-link {
+      padding: 11px 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--panel);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 750;
+    }
+
+    .external-link:hover { border-color: var(--cyan); }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 8;
+      display: none;
+      place-items: center;
+      padding: 18px;
+      background: rgba(5,6,16,.84);
+      backdrop-filter: blur(8px);
+    }
+
+    .modal.open { display: grid; }
+
+    .game-window {
+      width: min(760px, 100%);
+      max-height: min(92vh, 900px);
+      overflow: auto;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--panel);
+      box-shadow: 0 24px 80px rgba(0,0,0,.45);
+    }
+
+    .game-head {
+      position: sticky;
+      z-index: 2;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 17px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(25,28,53,.96);
+    }
+
+    .game-head h2 { margin: 0; font-size: 18px; }
+    .game-actions { display: flex; gap: 8px; }
+
+    .small-button {
+      min-height: 36px;
+      padding: 7px 11px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--panel-light);
+      cursor: pointer;
+    }
+
+    .small-button:hover { border-color: var(--accent); }
+
+    #gameArea {
+      min-height: 380px;
+      display: grid;
+      place-items: center;
+      padding: 22px;
+    }
+
+    .instructions { margin: 0 0 14px; color: var(--muted); text-align: center; }
+
+    .game-canvas {
+      width: min(100%, 620px);
+      border-radius: 12px;
+      background: #080a17;
+      touch-action: none;
+    }
+
+    .board-2048 {
+      width: min(390px, 100%);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      padding: 9px;
+      border-radius: 14px;
+      background: #353751;
+      touch-action: none;
+    }
+
+    .tile-2048 {
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: #262940;
+      color: #f9f4e8;
+      font-size: clamp(17px, 5vw, 28px);
+      font-weight: 900;
+    }
+
+    .tile-2048[data-value="2"] { background: #eee4da; color: #49433d; }
+    .tile-2048[data-value="4"] { background: #ede0c8; color: #49433d; }
+    .tile-2048[data-value="8"] { background: #f2b179; }
+    .tile-2048[data-value="16"] { background: #f59563; }
+    .tile-2048[data-value="32"] { background: #f67c5f; }
+    .tile-2048[data-value="64"] { background: #f65e3b; }
+    .tile-2048[data-value="128"], .tile-2048[data-value="256"],
+    .tile-2048[data-value="512"], .tile-2048[data-value="1024"],
+    .tile-2048[data-value="2048"] { background: #edcf72; color: #302817; }
+
+    .memory-board {
+      width: min(440px, 100%);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 9px;
+    }
+
+    .memory-card {
+      aspect-ratio: 1;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: var(--panel-light);
+      font-size: clamp(23px, 6vw, 36px);
+      cursor: pointer;
+    }
+
+    .memory-card.revealed { background: #3b3667; }
+    .memory-card.matched { background: #18574f; }
+
+    .ttt-board {
+      width: min(330px, 100%);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+    }
+
+    .ttt-cell {
+      aspect-ratio: 1;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--panel-light);
+      font-size: clamp(34px, 11vw, 58px);
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .mine-board {
+      display: grid;
+      grid-template-columns: repeat(9, minmax(27px, 38px));
+      gap: 3px;
+      padding: 5px;
+      border-radius: 10px;
+      background: #333650;
+    }
+
+    .mine-cell {
+      aspect-ratio: 1;
+      border: 0;
+      border-radius: 5px;
+      background: #646985;
+      color: white;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .mine-cell.revealed { background: #d6d9e7; color: #22263c; }
+    .mine-cell.flagged { background: #ef748e; }
+
+    .status-line {
+      min-height: 24px;
+      margin: 0 0 14px;
+      color: var(--cyan);
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .button-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 14px; }
+    .primary-button {
+      min-height: 42px;
+      padding: 9px 16px;
+      border: 0;
+      border-radius: 11px;
+      background: linear-gradient(120deg, var(--accent), #7558ec);
+      color: white;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .no-results { grid-column: 1/-1; padding: 34px; color: var(--muted); text-align: center; }
+
+    footer { padding: 18px 0 30px; color: var(--muted); font-size: 12px; text-align: center; }
+
+    @media (max-width: 900px) { .games { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 620px) {
+      .games { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .game-card { min-height: 180px; padding: 14px; }
+      .nav-note { display: none; }
+      #gameArea { min-height: 330px; padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell nav">
+      <div class="logo"><span class="logo-icon">🎮</span><span>iyedbensassi.gaming.io</span></div>
+      <div class="nav-note">Des jeux gratuits, jouables dans ton navigateur</div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div class="eyebrow">Bienvenue dans l’arcade</div>
+      <h1>Choisis ton prochain jeu.</h1>
+      <p>Des jeux rapides à lancer, sans téléchargement. Joue au clavier ou à la souris, seul ou à deux.</p>
+      <div class="hero-meta">
+        <span class="pill">7 jeux intégrés</span>
+        <span class="pill">15 jeux et portails web</span>
+        <span class="pill">Ordinateur et mobile</span>
+        <span class="pill">Gratuit</span>
+      </div>
+    </section>
+
+    <section class="web-search-panel" aria-labelledby="webSearchTitle">
+      <h2 id="webSearchTitle">Recherche Google</h2>
+      <form id="webSearchForm" class="web-search-form" action="https://www.google.com/search" method="get" target="_blank">
+        <input class="search" type="search" name="q" placeholder="Recherche tout sur le Web…" aria-label="Recherche sur le Web" required>
+        <select id="searchEngine" class="search-engine" aria-label="Moteur de recherche">
+          <option value="https://www.google.com/search">Google</option>
+          <option value="https://www.bing.com/search">Bing</option>
+          <option value="https://duckduckgo.com/">DuckDuckGo</option>
+        </select>
+        <button class="primary-button" type="submit">Rechercher ↗</button>
+      </form>
+    </section>
+
+    <section class="fortnite-panel" aria-labelledby="fortnitePanelTitle">
+      <h2 id="fortnitePanelTitle">Fortnite, sans téléchargement</h2>
+      <p>Joue via Xbox Cloud Gaming dans le navigateur. Si ta session Xbox/Microsoft est déjà ouverte, elle peut être réutilisée. Sinon, Xbox demandera une connexion pour lancer le jeu.</p>
+      <div class="fortnite-actions">
+        <a class="primary-button button-link" href="https://www.xbox.com/en-CA/play/games/fortnite/BT5P2X999VH2" target="_blank" rel="noopener noreferrer">Jouer à Fortnite ↗</a>
+        <a class="external-link" href="https://www.xbox.com/en-CA/play" target="_blank" rel="noopener noreferrer">Se connecter ou changer de compte ↗</a>
+      </div>
+    </section>
+
+    <div class="toolbar">
+      <h2>Tous les jeux</h2>
+      <input id="search" class="search" type="search" placeholder="Chercher un jeu…">
+    </div>
+
+    <section id="games" class="games" aria-label="Tous les jeux"></section>
+
+    <p class="section-label">Les mini-jeux intégrés et les jeux web compatibles se lancent sans installation. Roblox officiel demande Roblox Player.</p>
+  </main>
+
+  <footer class="shell">Fortnite s’ouvre via Xbox Cloud Gaming dans un nouvel onglet. Roblox officiel nécessite Roblox Player; Bloxd.io est une alternative jouable dans le navigateur.</footer>
+
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="gameTitle">
+    <section class="game-window">
+      <div class="game-head">
+        <h2 id="gameTitle">Jeu</h2>
+        <div class="game-actions">
+          <button id="restart" class="small-button" type="button">Recommencer</button>
+          <button id="close" class="small-button" type="button" aria-label="Fermer">Fermer ✕</button>
+        </div>
+      </div>
+      <div id="gameArea"></div>
+    </section>
+  </div>
+
+  <script>
+    const gameList = [
+      { id: "snake", name: "Snake", icon: "🐍", description: "Mange les pommes sans te mordre la queue.", keys: "Flèches ou WASD" },
+      { id: "2048", name: "2048", icon: "🔢", description: "Glisse les tuiles et atteins 2048.", keys: "Flèches ou glisser" },
+      { id: "memory", name: "Memory", icon: "🧠", description: "Trouve les 8 paires le plus vite possible.", keys: "Souris ou tactile" },
+      { id: "tictactoe", name: "Morpion", icon: "❎", description: "Aligne trois symboles. À deux joueurs.", keys: "Souris ou tactile" },
+      { id: "pong", name: "Pong", icon: "🏓", description: "Renvoie la balle et bats l’ordinateur.", keys: "Souris, ↑/↓ ou W/S" },
+      { id: "mines", name: "Démineur", icon: "💣", description: "Découvre les cases et évite les mines.", keys: "Clic : découvrir · clic droit : drapeau" },
+      { id: "breakout", name: "Casse-briques", icon: "🧱", description: "Casse les briques avec ta raquette.", keys: "Souris ou ←/→" }
+    ];
+
+    const webGames = [
+      { name: "Slither.io", icon: "🐍", description: "Grandis en mangeant des orbes et évite les autres serpents.", category: "Action · Multijoueur", url: "https://slither.io/" },
+      { name: "Agar.io", icon: "🟠", description: "Deviens la plus grosse cellule de l’arène.", category: "Action · Multijoueur", url: "https://agar.io/" },
+      { name: "Shell Shockers", icon: "🥚", description: "Combats multijoueurs dans un jeu de tir en navigateur.", category: "Action · Multijoueur", url: "https://shellshock.io/" },
+      { name: "Lichess", icon: "♟️", description: "Joue aux échecs en ligne gratuitement.", category: "Stratégie · Multijoueur", url: "https://lichess.org/" },
+      { name: "Chess.com", icon: "♟️", description: "Parties et puzzles d’échecs en ligne.", category: "Stratégie · Puzzle", url: "https://www.chess.com/play" },
+      { name: "Tetris", icon: "🧩", description: "Empile les blocs dans le jeu officiel en ligne.", category: "Puzzle", url: "https://tetris.com/play-tetris" },
+      { name: "Cookie Clicker", icon: "🍪", description: "Fabrique des cookies et améliore ta production.", category: "Stratégie", url: "https://orteil.dashnet.org/cookieclicker/" },
+      { name: "Skribbl.io", icon: "🎨", description: "Dessine un mot et fais-le deviner aux autres.", category: "Multijoueur", url: "https://skribbl.io/" },
+      { name: "CrazyGames", icon: "🎮", description: "Découvre une grande bibliothèque de jeux web.", category: "Catalogue · Action · Puzzle", url: "https://www.crazygames.com/" },
+      { name: "Poki", icon: "🕹️", description: "Explore des jeux gratuits directement dans le navigateur.", category: "Catalogue · Action · Puzzle", url: "https://poki.com/" },
+      { name: "Jeux HTML5 sur itch.io", icon: "🌐", description: "Parcours des jeux indépendants jouables sur le web.", category: "Catalogue · Indie", url: "https://itch.io/games/html5" },
+      { name: "Fortnite", icon: "🎯", description: "Le vrai Fortnite via Xbox Cloud Gaming, dans le navigateur.", category: "Action · Battle royale · Cloud", url: "https://www.xbox.com/en-CA/play/games/fortnite/BT5P2X999VH2" },
+      { name: "Roblox", icon: "🧱", description: "Le vrai Roblox; son site demande Roblox Player, donc il ne se lance pas sans installation.", category: "Aventure · Installation requise", url: "https://www.roblox.com/" },
+      { name: "Slope", icon: "🟢", description: "Joue à Slope dans le navigateur sur le site que tu avais indiqué.", category: "Arcade · Course · Navigateur", url: "https://slopeio.org/" },
+      { name: "Bloxd.io", icon: "🧊", description: "Alternative de jeu en blocs jouable dans le navigateur, ce n’est pas Roblox.", category: "Aventure · Style Roblox · Navigateur", url: "https://bloxd.io/" }
+    ];
+
+    const gamesNode = document.getElementById("games");
+    const search = document.getElementById("search");
+    const searchEngine = document.getElementById("searchEngine");
+    const webSearchForm = document.getElementById("webSearchForm");
+    const modal = document.getElementById("modal");
+    const gameTitle = document.getElementById("gameTitle");
+    const gameArea = document.getElementById("gameArea");
+    let activeGame = "";
+    let stopGame = () => {};
+    let restartGame = () => {};
+
+    function renderLibrary() {
+      const query = search.value.trim().toLowerCase();
+      const localMatches = gameList.filter(game =>
+        `${game.name} ${game.description} ${game.keys}`.toLowerCase().includes(query)
+      );
+      const webMatches = webGames.filter(game =>
+        `${game.name} ${game.description} ${game.category}`.toLowerCase().includes(query)
+      );
+      gamesNode.innerHTML = "";
+      if (!localMatches.length && !webMatches.length) {
+        gamesNode.innerHTML = '<div class="no-results">Aucun jeu trouvé.</div>';
+        return;
+      }
+      localMatches.forEach(game => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "game-card";
+        button.innerHTML = `<span class="game-icon" aria-hidden="true">${game.icon}</span><strong>${game.name}</strong><span>${game.description}</span>`;
+        button.addEventListener("click", () => openGame(game.id));
+        gamesNode.appendChild(button);
+      });
+      webMatches.forEach(game => {
+        const link = document.createElement("a");
+        link.className = "game-card";
+        link.href = game.url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.innerHTML = `<span class="game-icon" aria-hidden="true">${game.icon}</span><strong>${game.name}</strong><span>${game.description}</span><span class="game-source">${game.category} · Ouvrir ↗</span>`;
+        gamesNode.appendChild(link);
+      });
+    }
+
+    function openGame(id) {
+      stopGame();
+      activeGame = id;
+      const game = gameList.find(item => item.id === id);
+      gameTitle.textContent = game.name;
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+      startGame(id);
+    }
+
+    function closeGame() {
+      stopGame();
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+      activeGame = "";
+    }
+
+    function startGame(id) {
+      gameArea.innerHTML = "";
+      if (id === "snake") startSnake();
+      if (id === "2048") start2048();
+      if (id === "memory") startMemory();
+      if (id === "tictactoe") startTicTacToe();
+      if (id === "pong") startPong();
+      if (id === "mines") startMines();
+      if (id === "breakout") startBreakout();
+    }
+
+    function status(text) {
+      const line = document.createElement("p");
+      line.className = "status-line";
+      line.textContent = text;
+      gameArea.appendChild(line);
+      return line;
+    }
+
+    function buttonRow() {
+      const row = document.createElement("div");
+      row.className = "button-row";
+      gameArea.appendChild(row);
+      return row;
+    }
+
+    function addCanvas(width, height) {
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      canvas.className = "game-canvas";
+      canvas.setAttribute("aria-label", gameTitle.textContent);
+      gameArea.appendChild(canvas);
+      return [canvas, canvas.getContext("2d")];
+    }
+
+    function startSnake() {
+      const note = status("Utilise les flèches ou WASD. Espace pour mettre en pause.");
+      const [canvas, ctx] = addCanvas(420, 420);
+      const cell = 21;
+      let snake, direction, nextDirection, food, score, timer, paused, ended;
+      function reset() {
+        snake = [{ x: 10, y: 10 }, { x: 9, y: 10 }, { x: 8, y: 10 }];
+        direction = { x: 1, y: 0 }; nextDirection = { x: 1, y: 0 };
+        food = { x: 15, y: 9 }; score = 0; paused = false; ended = false;
+        note.textContent = "Score : 0 · Flèches/WASD pour bouger · Espace pour pause";
+        draw();
+      }
+      function draw() {
+        ctx.fillStyle = "#080a17"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#ff6fae"; ctx.fillRect(food.x * cell + 2, food.y * cell + 2, cell - 4, cell - 4);
+        snake.forEach((part, i) => {
+          ctx.fillStyle = i === 0 ? "#54e4d3" : "#6fcebd";
+          ctx.fillRect(part.x * cell + 2, part.y * cell + 2, cell - 4, cell - 4);
+        });
+        if (paused || ended) {
+          ctx.fillStyle = "rgba(8,10,23,.66)"; ctx.fillRect(0, 0, 420, 420);
+          ctx.fillStyle = "#fff"; ctx.font = "bold 28px system-ui"; ctx.textAlign = "center";
+          ctx.fillText(ended ? "Partie terminée" : "Pause", 210, 210);
+        }
+      }
+      function tick() {
+        if (paused || ended) return;
+        direction = nextDirection;
+        const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
+        if (head.x < 0 || head.x >= 20 || head.y < 0 || head.y >= 20 ||
+            snake.some(part => part.x === head.x && part.y === head.y)) {
+          ended = true; note.textContent = `Perdu ! Score : ${score}. Clique sur Recommencer.`; draw(); return;
+        }
+        snake.unshift(head);
+        if (head.x === food.x && head.y === food.y) {
+          score += 1;
+          do { food = { x: Math.floor(Math.random() * 20), y: Math.floor(Math.random() * 20) }; }
+          while (snake.some(part => part.x === food.x && part.y === food.y));
+          note.textContent = `Score : ${score} · Flèches/WASD pour bouger · Espace pour pause`;
+        } else snake.pop();
+        draw();
+      }
+      function key(e) {
+        const map = { ArrowUp: [0,-1], w: [0,-1], ArrowDown: [0,1], s: [0,1], ArrowLeft: [-1,0], a: [-1,0], ArrowRight: [1,0], d: [1,0] };
+        const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+        if (key === " " && activeGame === "snake") { e.preventDefault(); paused = !paused; draw(); return; }
+        if (!map[key]) return;
+        e.preventDefault();
+        const [x,y] = map[key];
+        if (x !== -direction.x || y !== -direction.y) nextDirection = { x, y };
+      }
+      document.addEventListener("keydown", key);
+      reset();
+      timer = window.setInterval(tick, 115);
+      stopGame = () => { clearInterval(timer); document.removeEventListener("keydown", key); };
+      restartGame = reset;
+    }
+
+    function start2048() {
+      const note = status("Fusionne les mêmes nombres avec les flèches ou en glissant.");
+      const boardNode = document.createElement("div");
+      boardNode.className = "board-2048"; boardNode.tabIndex = 0; gameArea.appendChild(boardNode);
+      let board, score, over, touchStart;
+      function spawn() {
+        const empty = [];
+        board.forEach((row, y) => row.forEach((value, x) => { if (!value) empty.push([y,x]); }));
+        if (!empty.length) return;
+        const [y,x] = empty[Math.floor(Math.random() * empty.length)];
+        board[y][x] = Math.random() < .9 ? 2 : 4;
+      }
+      function reset() {
+        board = Array.from({ length: 4 }, () => Array(4).fill(0));
+        score = 0; over = false; spawn(); spawn(); draw();
+      }
+      function draw() {
+        boardNode.innerHTML = "";
+        board.forEach(row => row.forEach(value => {
+          const tile = document.createElement("div");
+          tile.className = "tile-2048";
+          if (value) tile.dataset.value = value;
+          tile.textContent = value || "";
+          boardNode.appendChild(tile);
+        }));
+        note.textContent = `Score : ${score}${over ? " · Plus de coups possibles. Recommence pour rejouer." : " · Meilleur score : fusionne jusqu’à 2048 !"}`;
+      }
+      function move(direction) {
+        if (over) return;
+        let changed = false;
+        const previous = JSON.stringify(board);
+        for (let i = 0; i < 4; i++) {
+          let coords = [];
+          for (let j = 0; j < 4; j++) {
+            if (direction === "left") coords.push([i,j]);
+            if (direction === "right") coords.push([i,3-j]);
+            if (direction === "up") coords.push([j,i]);
+            if (direction === "down") coords.push([3-j,i]);
+          }
+          const values = coords.map(([y,x]) => board[y][x]).filter(Boolean);
+          for (let j = 0; j < values.length - 1; j++) {
+            if (values[j] === values[j+1]) {
+              values[j] *= 2; score += values[j]; values.splice(j+1, 1);
+            }
+          }
+          while (values.length < 4) values.push(0);
+          coords.forEach(([y,x], j) => { board[y][x] = values[j]; });
+        }
+        changed = previous !== JSON.stringify(board);
+        if (changed) spawn();
+        const canMove = board.some(row => row.includes(0)) || board.some((row,y) => row.some((v,x) =>
+          (x < 3 && v === row[x+1]) || (y < 3 && v === board[y+1][x])));
+        over = !canMove; draw();
+      }
+      function key(e) {
+        const dirs = { ArrowLeft:"left", ArrowRight:"right", ArrowUp:"up", ArrowDown:"down" };
+        if (!dirs[e.key] || activeGame !== "2048") return;
+        e.preventDefault(); move(dirs[e.key]);
+      }
+      function touchStartFn(e) { touchStart = [e.changedTouches[0].clientX, e.changedTouches[0].clientY]; }
+      function touchEndFn(e) {
+        if (!touchStart) return;
+        const dx = e.changedTouches[0].clientX - touchStart[0];
+        const dy = e.changedTouches[0].clientY - touchStart[1];
+        if (Math.max(Math.abs(dx), Math.abs(dy)) > 25) move(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? "right" : "left") : (dy > 0 ? "down" : "up"));
+        touchStart = null;
+      }
+      document.addEventListener("keydown", key);
+      boardNode.addEventListener("touchstart", touchStartFn, { passive:true });
+      boardNode.addEventListener("touchend", touchEndFn, { passive:true });
+      reset();
+      stopGame = () => { document.removeEventListener("keydown", key); boardNode.removeEventListener("touchstart", touchStartFn); boardNode.removeEventListener("touchend", touchEndFn); };
+      restartGame = reset;
+    }
+
+    function startMemory() {
+      const note = status("Coups : 0 · Retrouve toutes les paires.");
+      const board = document.createElement("div");
+      board.className = "memory-board"; gameArea.appendChild(board);
+      let values, opened, matched, moves, lock, timer;
+      function reset() {
+        values = ["🍓","🍋","🍇","🍉","🍒","🥝","🍍","🥑","🍓","🍋","🍇","🍉","🍒","🥝","🍍","🥑"].sort(() => Math.random() - .5);
+        opened = []; matched = new Set(); moves = 0; lock = false; draw();
+      }
+      function draw() {
+        board.innerHTML = "";
+        values.forEach((value, i) => {
+          const button = document.createElement("button");
+          button.className = "memory-card" + (matched.has(i) ? " matched" : opened.includes(i) ? " revealed" : "");
+          button.type = "button"; button.textContent = matched.has(i) || opened.includes(i) ? value : "❔";
+          button.setAttribute("aria-label", matched.has(i) || opened.includes(i) ? value : `Carte cachée ${i+1}`);
+          button.disabled = matched.has(i) || lock;
+          button.addEventListener("click", () => flip(i));
+          board.appendChild(button);
+        });
+        note.textContent = matched.size === 16 ? `Bravo ! Toutes les paires trouvées en ${moves} coups.` : `Coups : ${moves} · Paires : ${matched.size / 2}/8`;
+      }
+      function flip(index) {
+        if (lock || matched.has(index) || opened.includes(index)) return;
+        opened.push(index);
+        if (opened.length === 2) {
+          moves++;
+          if (values[opened[0]] === values[opened[1]]) {
+            opened.forEach(i => matched.add(i)); opened = []; draw();
+          } else {
+            lock = true; draw();
+            timer = setTimeout(() => { opened = []; lock = false; draw(); }, 750);
+          }
+        } else draw();
+      }
+      reset();
+      stopGame = () => clearTimeout(timer);
+      restartGame = reset;
+    }
+
+    function startTicTacToe() {
+      const note = status("Tour de X.");
+      const boardNode = document.createElement("div");
+      boardNode.className = "ttt-board"; gameArea.appendChild(boardNode);
+      let cells, turn, winner;
+      const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+      function reset() { cells = Array(9).fill(""); turn = "X"; winner = ""; draw(); }
+      function draw() {
+        boardNode.innerHTML = "";
+        cells.forEach((value, i) => {
+          const button = document.createElement("button");
+          button.className = "ttt-cell"; button.type = "button";
+          button.textContent = value; button.setAttribute("aria-label", value ? `${value}, case ${i+1}` : `Case ${i+1}`);
+          button.disabled = Boolean(value || winner);
+          button.addEventListener("click", () => play(i));
+          boardNode.appendChild(button);
+        });
+        note.textContent = winner ? (winner === "draw" ? "Match nul !" : `${winner} a gagné !`) : `Tour de ${turn}.`;
+      }
+      function play(i) {
+        if (cells[i] || winner) return;
+        cells[i] = turn;
+        const line = wins.find(combo => combo.every(index => cells[index] === turn));
+        if (line) winner = turn;
+        else if (cells.every(Boolean)) winner = "draw";
+        else turn = turn === "X" ? "O" : "X";
+        draw();
+      }
+      reset();
+      stopGame = () => {};
+      restartGame = reset;
+    }
+
+    function startPong() {
+      const note = status("Déplace la raquette avec la souris, ↑/↓ ou W/S.");
+      const [canvas, ctx] = addCanvas(620, 380);
+      let playerY, cpuY, ball, score, cpuScore, raf, running, keys = {};
+      function reset() {
+        cancelAnimationFrame(raf);
+        playerY = cpuY = 150; score = cpuScore = 0;
+        ball = { x: 310, y: 190, vx: (Math.random() > .5 ? 4 : -4), vy: (Math.random()-.5)*5 };
+        running = true; note.textContent = "Toi 0 — 0 CPU · Premier à 7 gagne."; draw();
+        raf = requestAnimationFrame(loop);
+      }
+      function draw() {
+        ctx.fillStyle = "#080a17"; ctx.fillRect(0,0,620,380);
+        ctx.setLineDash([8,10]); ctx.strokeStyle = "#383c5b"; ctx.beginPath(); ctx.moveTo(310,0); ctx.lineTo(310,380); ctx.stroke(); ctx.setLineDash([]);
+        ctx.fillStyle = "#54e4d3"; ctx.fillRect(18,playerY,12,80);
+        ctx.fillStyle = "#ff6fae"; ctx.fillRect(590,cpuY,12,80);
+        ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(ball.x,ball.y,8,0,Math.PI*2); ctx.fill();
+        ctx.font = "bold 32px system-ui"; ctx.textAlign = "center"; ctx.fillText(`${score}   ${cpuScore}`,310,42);
+      }
+      function loop() {
+        if (!running) return;
+        if (keys.ArrowUp || keys.w) playerY -= 6;
+        if (keys.ArrowDown || keys.s) playerY += 6;
+        playerY = Math.max(0,Math.min(300,playerY));
+        cpuY += Math.sign(ball.y - (cpuY+40)) * Math.min(4.2, Math.abs(ball.y-(cpuY+40))*.045);
+        ball.x += ball.vx; ball.y += ball.vy;
+        if (ball.y < 8 || ball.y > 372) ball.vy *= -1;
+        if (ball.vx < 0 && ball.x < 38 && ball.y > playerY-6 && ball.y < playerY+86) {
+          ball.vx = Math.abs(ball.vx)*1.04; ball.vy += (ball.y-(playerY+40))*.07;
+        } else if (ball.vx > 0 && ball.x > 582 && ball.y > cpuY-6 && ball.y < cpuY+86) {
+          ball.vx = -Math.abs(ball.vx)*1.04; ball.vy += (ball.y-(cpuY+40))*.06;
+        }
+        if (ball.x < 0) { cpuScore++; resetBall(1); }
+        if (ball.x > 620) { score++; resetBall(-1); }
+        if (score >= 7 || cpuScore >= 7) {
+          running = false; note.textContent = score > cpuScore ? "Tu as gagné ! Recommence pour une revanche." : "Le CPU a gagné. Essaie encore !";
+        }
+        draw();
+        if (running) raf = requestAnimationFrame(loop);
+      }
+      function resetBall(dir) { note.textContent = `Toi ${score} — ${cpuScore} CPU · Premier à 7 gagne.`; ball = { x:310,y:190,vx:dir*4,vy:(Math.random()-.5)*5 }; }
+      function keydown(e) { if (["ArrowUp","ArrowDown"," "].includes(e.key)) e.preventDefault(); keys[e.key.length===1 ? e.key.toLowerCase() : e.key] = true; }
+      function keyup(e) { keys[e.key.length===1 ? e.key.toLowerCase() : e.key] = false; }
+      function mouse(e) { const rect = canvas.getBoundingClientRect(); playerY = (e.clientY-rect.top)*canvas.height/rect.height - 40; }
+      document.addEventListener("keydown",keydown); document.addEventListener("keyup",keyup); canvas.addEventListener("pointermove",mouse);
+      reset();
+      stopGame = () => { running=false; cancelAnimationFrame(raf); document.removeEventListener("keydown",keydown); document.removeEventListener("keyup",keyup); canvas.removeEventListener("pointermove",mouse); };
+      restartGame = reset;
+    }
+
+    function startMines() {
+      const note = status("10 mines cachées · Clic pour découvrir · Clic droit pour poser un drapeau.");
+      const boardNode = document.createElement("div");
+      boardNode.className = "mine-board"; gameArea.appendChild(boardNode);
+      const size = 9, mineCount = 10;
+      let cells, ended, first;
+      function reset() {
+        cells = Array.from({length:size*size}, () => ({mine:false,open:false,flag:false,count:0}));
+        ended = false; first = true; draw();
+      }
+      function placeMines(safeIndex) {
+        let placed = 0;
+        while (placed < mineCount) {
+          const i = Math.floor(Math.random()*cells.length);
+          if (i === safeIndex || cells[i].mine) continue;
+          cells[i].mine = true; placed++;
+        }
+        cells.forEach((cell,i) => {
+          const neighbors = around(i);
+          cell.count = neighbors.filter(n => cells[n].mine).length;
+        });
+      }
+      function around(i) {
+        const x=i%size,y=Math.floor(i/size), result=[];
+        for(let dy=-1;dy<=1;dy++) for(let dx=-1;dx<=1;dx++) {
+          const nx=x+dx,ny=y+dy;
+          if((dx||dy)&&nx>=0&&nx<size&&ny>=0&&ny<size) result.push(ny*size+nx);
+        }
+        return result;
+      }
+      function reveal(i) {
+        const cell=cells[i];
+        if(cell.open||cell.flag||ended)return;
+        if(first){placeMines(i);first=false;}
+        cell.open=true;
+        if(cell.mine){ended=true;note.textContent="Aïe, une mine ! Recommence pour rejouer.";cells.forEach(c=>{if(c.mine)c.open=true;});draw();return;}
+        if(cell.count===0) around(i).forEach(n=>{if(!cells[n].open)reveal(n);});
+        if(cells.filter(c=>!c.mine&&c.open).length===cells.length-mineCount){ended=true;note.textContent="Bravo, terrain déminé !";}
+        draw();
+      }
+      function draw() {
+        boardNode.innerHTML="";
+        cells.forEach((cell,i)=>{
+          const button=document.createElement("button");button.type="button";button.className="mine-cell";
+          if(cell.open){button.classList.add("revealed");button.textContent=cell.mine?"💣":cell.count||"";}
+          else if(cell.flag){button.classList.add("flagged");button.textContent="⚑";}
+          button.setAttribute("aria-label",cell.open?(cell.mine?"Mine":`Case découverte ${cell.count||""}`):`Case cachée ${i+1}`);
+          button.disabled=cell.open||ended;
+          button.addEventListener("click",()=>reveal(i));
+          button.addEventListener("contextmenu",e=>{e.preventDefault();if(!cell.open&&!ended){cell.flag=!cell.flag;draw();}});
+          boardNode.appendChild(button);
+        });
+        if(!ended) note.textContent=`Démineur · ${cells.filter(c=>c.flag).length}/${mineCount} drapeaux posés`;
+      }
+      reset(); stopGame=()=>{}; restartGame=reset;
+    }
+
+    function startBreakout() {
+      const note=status("Déplace la raquette avec la souris ou ←/→. Garde la balle en jeu !");
+      const [canvas,ctx]=addCanvas(620,400);
+      let paddle, ball, bricks, score, lives, raf, running, keys={};
+      function reset() {
+        cancelAnimationFrame(raf);
+        paddle={x:260,w:100};ball={x:310,y:340,vx:3,vy:-4,r:8};
+        bricks=Array.from({length:5},(_,row)=>Array.from({length:10},(_,col)=>({x:20+col*58,y:35+row*25,w:50,h:16,on:true})));
+        score=0;lives=3;running=true;note.textContent="Score : 0 · Vies : 3";draw();
+        raf=requestAnimationFrame(loop);
+      }
+      function draw() {
+        ctx.fillStyle="#080a17";ctx.fillRect(0,0,620,400);
+        const colors=["#9c7bff","#54e4d3","#ff6fae","#f4b65d","#72a9ff"];
+        bricks.forEach((row,ri)=>row.forEach(b=>{if(b.on){ctx.fillStyle=colors[ri];ctx.fillRect(b.x,b.y,b.w,b.h);}}));
+        ctx.fillStyle="#f5f6ff";ctx.fillRect(paddle.x,370,paddle.w,12);
+        ctx.fillStyle="#ffcc66";ctx.beginPath();ctx.arc(ball.x,ball.y,ball.r,0,Math.PI*2);ctx.fill();
+        ctx.font="bold 17px system-ui";ctx.fillStyle="#fff";ctx.textAlign="left";ctx.fillText(`Score ${score}  ·  Vies ${lives}`,18,390);
+      }
+      function loop() {
+        if(!running)return;
+        if(keys.ArrowLeft||keys.a)paddle.x-=7;
+        if(keys.ArrowRight||keys.d)paddle.x+=7;
+        paddle.x=Math.max(0,Math.min(620-paddle.w,paddle.x));
+        ball.x+=ball.vx;ball.y+=ball.vy;
+        if(ball.x<ball.r||ball.x>620-ball.r)ball.vx*=-1;
+        if(ball.y<ball.r)ball.vy=Math.abs(ball.vy);
+        if(ball.vy>0&&ball.y+ball.r>=370&&ball.y<385&&ball.x>=paddle.x&&ball.x<=paddle.x+paddle.w){
+          ball.vy=-Math.abs(ball.vy);ball.vx=((ball.x-(paddle.x+paddle.w/2))/(paddle.w/2))*5;
+        }
+        bricks.forEach(row=>row.forEach(b=>{
+          if(b.on&&ball.x>b.x&&ball.x<b.x+b.w&&ball.y-ball.r<b.y+b.h&&ball.y+ball.r>b.y){
+            b.on=false;ball.vy*=-1;score+=10;
+          }
+        }));
+        if(ball.y>410){
+          lives--;
+          if(lives<=0){running=false;note.textContent=`Partie terminée · Score : ${score}. Clique sur Recommencer.`;}
+          else ball={x:310,y:340,vx:3,vy:-4,r:8};
+        }
+        if(bricks.every(row=>row.every(b=>!b.on))){running=false;note.textContent=`Bravo, toutes les briques sont cassées ! Score : ${score}.`;}
+        if(running)note.textContent=`Score : ${score} · Vies : ${lives}`;
+        draw();
+        if(running)raf=requestAnimationFrame(loop);
+      }
+      function keydown(e){if(["ArrowLeft","ArrowRight"].includes(e.key))e.preventDefault();keys[e.key.length===1?e.key.toLowerCase():e.key]=true;}
+      function keyup(e){keys[e.key.length===1?e.key.toLowerCase():e.key]=false;}
+      function mouse(e){const rect=canvas.getBoundingClientRect();paddle.x=(e.clientX-rect.left)*canvas.width/rect.width-paddle.w/2;}
+      document.addEventListener("keydown",keydown);document.addEventListener("keyup",keyup);canvas.addEventListener("pointermove",mouse);
+      reset();
+      stopGame=()=>{running=false;cancelAnimationFrame(raf);document.removeEventListener("keydown",keydown);document.removeEventListener("keyup",keyup);canvas.removeEventListener("pointermove",mouse);};
+      restartGame=reset;
+    }
+
+    document.getElementById("close").addEventListener("click", closeGame);
+    document.getElementById("restart").addEventListener("click", () => restartGame());
+    modal.addEventListener("click", e => { if (e.target === modal) closeGame(); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && modal.classList.contains("open")) closeGame(); });
+    search.addEventListener("input", renderLibrary);
+    searchEngine.addEventListener("change", () => { webSearchForm.action = searchEngine.value; });
+    renderLibrary();
+  </script>
+</body>
+</html>
